@@ -18,12 +18,10 @@ export function App() {
     ) {
       window.alert(`${contactName} is already in contacts`);
     } else {
-      setContacts(prevContacts => {
-        contacts = [
-          ...prevContacts,
-          { id: id, name: contactName, number: contactNumber },
-        ];
-      });
+      setContacts(prevContacts => [
+        ...prevContacts,
+        { id: id, name: contactName, number: contactNumber },
+      ]);
     }
   };
 
@@ -39,7 +37,7 @@ export function App() {
 
   const deleteContact = e => {
     setContacts(prevContacts => {
-      contacts = prevContacts.filter(({ name }) => name !== e.target.value);
+      return prevContacts.filter(({ name }) => name !== e.target.value);
     });
   };
 
@@ -48,7 +46,12 @@ export function App() {
       localStorage.getItem('contacts')
     );
 
-    setContacts(contacts = contactsFromLastSession);
+    if (
+      contactsFromLastSession !== null &&
+      contactsFromLastSession.length !== 0
+    ) {
+      setContacts(contactsFromLastSession);
+    }
   }, []);
 
   useEffect(() => {
