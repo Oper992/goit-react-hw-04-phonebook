@@ -65,7 +65,7 @@ export function App() {
       <h2>Contacts</h2>
       <Filter filter={filter} addToFilter={addToFilter} />
       <ContactList
-        filteredContacts={filteredContacts}
+        filteredContacts={filteredContacts()}
         deleteContact={deleteContact}
       />
     </>
